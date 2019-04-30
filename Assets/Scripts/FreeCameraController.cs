@@ -9,7 +9,7 @@ public class FreeCameraController : MonoBehaviour
     public Transform model;
     // 默认距离
     private const float default_distance = 10f;
-    private const float default_distance_max = 25f;
+    private const float default_distance_max = 20f;
     private const float default_distance_min = 3.5f;
 
     private float distanceFromModel = 0f;
@@ -119,8 +119,10 @@ public class FreeCameraController : MonoBehaviour
                             }
                             if (deltaTouchDistance > 0 && (distanceFromModel - deltaTouchDistance < default_distance_min))
                             {
-                                deltaTouchDistance = deltaTouchDistance - (default_distance_min - (distanceFromModel - distanceFromModel));
+                                Debug.LogFormat("deltaTouchDistance: {0}, distanceFromModel: {1}", deltaTouchDistance, distanceFromModel);
+                                deltaTouchDistance = deltaTouchDistance - (default_distance_min - (distanceFromModel - deltaTouchDistance));
                             }
+                            Debug.Log("deltaTouchDistance: " + deltaTouchDistance);
                             transform.position += transform.rotation * new Vector3(0, 0, deltaTouchDistance) * Time.deltaTime;
                             lastTouchesDistance = curTouchedDistance;
                             UpdateDistanceFromModel();
@@ -205,5 +207,6 @@ public class FreeCameraController : MonoBehaviour
     private void UpdateDistanceFromModel()
     {
         distanceFromModel = Vector3.Distance(transform.position, model.position);
+        Debug.Log("UpdateDistanceFromModel: " + distanceFromModel);
     }
 }
