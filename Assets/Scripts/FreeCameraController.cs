@@ -119,9 +119,9 @@ public class FreeCameraController : MonoBehaviour
                             }
                             if (deltaTouchDistance > 0 && (distanceFromModel - deltaTouchDistance < default_distance_min))
                             {
-                                deltaTouchDistance = default_distance_min - (distanceFromModel - distanceFromModel) + deltaTouchDistance;
+                                deltaTouchDistance = deltaTouchDistance - (default_distance_min - (distanceFromModel - distanceFromModel));
                             }
-                            transform.position += transform.rotation * new Vector3(0, 0, deltaTouchDistance) * Time.deltaTime * 0.2f;
+                            transform.position += transform.rotation * new Vector3(0, 0, deltaTouchDistance) * Time.deltaTime;
                             lastTouchesDistance = curTouchedDistance;
                             UpdateDistanceFromModel();
                         }
